@@ -1,0 +1,264 @@
+#:import settings settings
+
+<SettingsScreen>:
+    on_enter: root.update_sliders()
+    canvas.before:
+        Color:
+            rgb: settings.azure
+        Rectangle:
+            size: self.size
+        Color:
+            rgba: settings.dark_azure
+        Rectangle:
+            size: self.width, self.height * 0.1
+            pos: 0, self.height * 0.9
+        Color:
+            rgba: settings.very_dark_azure
+        Line:
+            points: (0, self.height * 0.9, self.width, self.height * 0.9)
+            width: 3
+        Line:
+            points: 0, 0, 0, self.height
+            width: 10
+        Line:
+            points: self.width, 0, self.width, self.height
+            width: 10
+
+    Label:
+        text: ' Settings: '
+        color: settings.white
+        font_size: dp(35)
+        font_name: "fonts/font_1.ttf"
+        size_hint_y: 0.1
+        pos_hint: {"center_x": 0.25, "center_y": 0.95}
+
+    MDIconButton:
+        md_bg_color: 0, 0, 0, 0
+        pos_hint: {"center_x": 0.08, "center_y": 0.95}
+        icon: "arrow-left"
+        theme_text_color: "Custom"
+        text_color: settings.dark_grey
+        user_font_size: "40dp"
+        ripple_color: settings.violet_red
+        ripple_alpha: 0.9
+        on_release:
+            root.manager.transition.direction = "right"
+            root.manager.transition.duration = 0.5
+            root.manager.current = 'main_menu'
+
+    FloatLayout:
+        ScrollView:
+            bar_color: 0, 0, 0, 0
+            size_hint: 1, 0.895
+            scroll_y: 1
+            FloatLayout
+                size_hint_y: root.screen_height
+                canvas.before:
+                    Color:
+                        rgba: settings.very_dark_azure
+                    Line:
+                        points: (0, self.height * (1 - 0.53/root.screen_height), self.width, self.height * (1 - 0.53/root.screen_height))
+                        width: 3
+                    Line:
+                        points: (0, self.height * (1 - 1.14/root.screen_height), self.width, self.height * (1 - 1.14/root.screen_height))
+                        width: 3
+
+                CategoryLabel:
+                    text: 'Main Mode:'
+                    pos_hint: {"center_x": 0.14, "center_y": (1 - 0.04/root.screen_height)}
+
+                # Keypad Size:
+                OptionLabel:
+                    text: "Keypad Size: "
+                    font_size: dp(25)
+                    pos_hint: {"center_x": 0.5, "center_y": (1 - 0.08/root.screen_height)}
+                OptionLabel:
+                    text: root.keypad_label
+                    pos_hint: {"center_x": 0.5, "center_y": (1 - 0.15/root.screen_height)}
+                SliderLayout:
+                    pos_hint: {"center_x": 0.5, "center_y": (1 - 0.12/root.screen_height)}
+                    ScrollViewSlider:
+                        id: kp_slider
+                        min: 1
+                        max: 4
+                        step: 1
+                        hint: False
+                        show_off: False
+                        padding: self.width * 0.2
+                        hint_text_color: settings.white
+                        on_value: root.on_kp_slider_value(self)
+
+                # Main Mode digits between spacing:
+                OptionLabel:
+                    text: "Digits Between Spacing: "
+                    font_size: dp(25)
+                    pos_hint: {"center_x": 0.5, "center_y": (1 - 0.23/root.screen_height)}
+                OptionLabel:
+                    text: root.dbs_label
+                    pos_hint: {"center_x": 0.5, "center_y": (1 - 0.3/root.screen_height)}
+                SliderLayout:
+                    pos_hint: {"center_x": 0.5, "center_y": (1 - 0.27/root.screen_height)}
+                    ScrollViewSlider:
+                        id: dbs_slider
+                        min: 1
+                        max: 10
+                        step: 1
+                        hint: False
+                        show_off: False
+                        padding: self.width * 0.2
+                        hint_text_color: settings.white
+                        on_value: root.on_dbs_slider_value(self)
+
+                # Main Mode digits to highlight:
+                OptionLabel:
+                    text: root.hd_title_label
+                    font_size: dp(25)
+                    markup: True
+                    pos_hint: {"center_x": 0.5, "center_y": (1 - 0.38/root.screen_height)}
+                OptionLabel:
+                    text: root.hd_label
+                    pos_hint: {"center_x": 0.5, "center_y": (1 - 0.45/root.screen_height)}
+                SliderLayout:
+                    pos_hint: {"center_x": 0.5, "center_y": (1 - 0.42/root.screen_height)}
+                    ScrollViewSlider:
+                        id: hd_slider
+                        min: 10
+                        max: 100
+                        step: 10
+                        hint: False
+                        show_off: False
+                        padding: self.width * 0.2
+                        hint_text_color: settings.white
+                        on_value: root.on_hd_slider_value(self)
+
+                OptionLabel:
+                    text: 'Keypad Layout: '
+                    font_size: dp(25)
+                    pos_hint: {"center_x": 0.3, "center_y": (1 - 0.53/root.screen_height)}
+                MDIconButton:
+                    md_bg_color: 0, 0, 0, 0
+                    pos_hint: {"center_x": 0.8, "center_y": (1 - 0.53/root.screen_height)}
+                    icon: "keyboard-settings-outline"
+                    theme_text_color: "Custom"
+                    text_color: settings.white
+                    user_font_size: "40dp"
+                    ripple_color: settings.dark_grey
+                    ripple_alpha: 0.7
+
+                CategoryLabel:
+                    text: 'Training Mode:'
+                    pos_hint: {"center_x": 0.14, "center_y": (1 - 0.57/root.screen_height)}
+
+                # Training Mode digits to load:
+                OptionLabel:
+                    text: "Digits to Load: "
+                    font_size: dp(25)
+                    pos_hint: {"center_x": 0.5, "center_y": (1 - 0.61/root.screen_height)}
+                OptionLabel:
+                    text: root.pt_dtl_label
+                    pos_hint: {"center_x": 0.5, "center_y": (1 - 0.68/root.screen_height)}
+                SliderLayout:
+                    pos_hint: {"center_x": 0.5, "center_y": (1 - 0.65/root.screen_height)}
+                    ScrollViewSlider:
+                        id: pt_dtl_slider
+                        min: 10
+                        max: 100
+                        step: 10
+                        hint: False
+                        show_off: False
+                        padding: self.width * 0.2
+                        hint_text_color: settings.white
+                        on_value: root.on_pt_dtl_slider_value(self)
+
+                # Training Mode digits between spacing:
+                OptionLabel:
+                    text: "Digits Between Spacing: "
+                    font_size: dp(25)
+                    pos_hint: {"center_x": 0.5, "center_y": (1 - 0.76/root.screen_height)}
+                OptionLabel:
+                    text: root.pt_dbs_label
+                    pos_hint: {"center_x": 0.5, "center_y": (1 - 0.83/root.screen_height)}
+                SliderLayout:
+                    pos_hint: {"center_x": 0.5, "center_y": (1 - 0.8/root.screen_height)}
+                    ScrollViewSlider:
+                        id: pt_dbs_slider
+                        min: 1
+                        max: 10
+                        step: 1
+                        hint: False
+                        show_off: False
+                        padding: self.width * 0.2
+                        hint_text_color: settings.white
+                        on_value: root.on_pt_dbs_slider_value(self)
+
+                # Training Mode digits to highlight:
+                OptionLabel:
+                    text: root.pt_hd_title_label
+                    font_size: dp(25)
+                    markup: True
+                    pos_hint: {"center_x": 0.5, "center_y": (1 - 0.91/root.screen_height)}
+                OptionLabel:
+                    text: root.pt_hd_label
+                    pos_hint: {"center_x": 0.5, "center_y": (1 - 0.98/root.screen_height)}
+                SliderLayout:
+                    pos_hint: {"center_x": 0.5, "center_y": (1 - 0.95/root.screen_height)}
+                    ScrollViewSlider:
+                        id: pt_hd_slider
+                        min: 10
+                        max: 100
+                        step: 10
+                        hint: False
+                        show_off: False
+                        padding: self.width * 0.2
+                        hint_text_color: settings.white
+                        on_value: root.on_pt_hd_slider_value(self)
+
+                # Training Mode start from settings:
+                OptionLabel:
+                    text: 'Start From Your Best Score: '
+                    font_size: dp(25)
+                    pos_hint: {"center_x": 0.45, "center_y": (1 - 1.06/root.screen_height)}
+                MDSwitch:
+                    active: root.data['pt_start_from_record']
+                    on_active: root.start_from_record_switch(self.active)
+                    pos_hint: {"center_x": 0.75, "center_y": (1 - 1.06/root.screen_height)}
+
+                CategoryLabel:
+                    text: 'Other: '
+                    pos_hint: {"center_x": 0.1, "center_y": (1 - 1.18/root.screen_height)}
+
+                # Dark Mode Switch:
+                OptionLabel:
+                    text: 'Dark mode:'
+                    font_size: dp(25)
+                    pos_hint: {"center_x": 0.45, "center_y": (1 - 1.22/root.screen_height)}
+                MDSwitch:
+                    active: root.data['dark_mode']
+                    on_active: app.dark_mode_switch(self.active)
+                    pos_hint: {"center_x": 0.62, "center_y": (1 - 1.22/root.screen_height)}
+
+                # Menu Status Switch:
+                OptionLabel:
+                    text: 'Show Status in Main Menu: '
+                    font_size: dp(25)
+                    pos_hint: {"center_x": 0.45, "center_y": (1 - 1.3/root.screen_height)}
+                MDSwitch:
+                    active: root.data['dark_mode']
+                    on_active: app.dark_mode_switch(self.active)
+                    pos_hint: {"center_x": 0.75, "center_y": (1 - 1.3/root.screen_height)}
+# ----------------------------------------------------------------------------------------------------------------------
+<CategoryLabel@Label>:
+    font_size: dp(18)
+    font_name: "fonts/font_1.ttf"
+    color: settings.very_dark_azure
+
+<OptionLabel@Label>:
+    font_size: dp(20)
+    font_name: "fonts/font_1.ttf"
+    color: settings.white
+
+<SliderLayout@BoxLayout>:
+    rows: 1
+    cols: 1
+    size_hint: 1, 0.05
+

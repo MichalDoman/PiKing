@@ -1,0 +1,455 @@
+#:import settings settings
+
+<ScoresScreen>:
+    on_pre_enter: root.update_scores()
+    canvas.before:
+        Color:
+            rgb: settings.violet_red
+        Rectangle:
+            size: self.size
+        Color:
+            rgba: settings.dark_violet_red
+        Rectangle:
+            size: self.width, self.height * 0.1
+            pos: 0, self.height * 0.9
+        Color:
+            rgba: settings.blue
+        Line:
+            points: 0, 0, 0, self.height
+            width: 15
+        Color:
+            rgba: settings.yellow
+        Line:
+            points: self.width, 0, self.width, self.height
+            width: 15
+        Color:
+            rgba: settings.dark_blue
+        Line:
+            points: 0, self.height * 0.914, 0, self.height
+            width: 15
+        Color:
+            rgba: settings.dark_yellow
+        Line:
+            points: self.width, self.height * 0.914, self.width, self.height
+            width: 15
+        Color:
+            rgba: settings.grey
+        Line:
+            points: 0, self.height * 0.9, self.width, self.height * 0.9
+            width: 4
+        Color:
+            rgba: settings.white
+        Line:
+            points: self.width * 0.17, self.height * 0.77, self.width * 0.83, self.height * 0.77
+            width: 2
+
+    MenuArrowButton:
+
+    BackToMenu:
+
+    Category:
+        text: 'Most Decimals'
+
+    ArrowButton:
+        pos_hint: {"center_x": 0.08, "center_y": 0.84}
+        icon: "arrow-left-bold-outline"
+        on_release:
+            root.manager.transition.direction = "right"
+            root.manager.transition.duration = 0.5
+            root.manager.current = 'scores_screen_4'
+
+    ArrowButton:
+        pos_hint: {"center_x": 0.92, "center_y": 0.84}
+        icon: "arrow-right-bold-outline"
+        on_release:
+            root.manager.transition.direction = "left"
+            root.manager.transition.duration = 0.5
+            root.manager.current = 'scores_screen_2'
+
+    MainScore:
+        text: root.decimals_label
+    ScoreLabel:
+        text: root.points_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.63}
+    ScoreLabel:
+        text: root.mistakes_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.58}
+    ScoreLabel:
+        text: root.efficacy_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.53}
+
+    ScoreLabel:
+        text: root.longest_combo_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.48}
+    ScoreLabel:
+        text: root.extra_points_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.43}
+    ScoreLabel:
+        text: root.combo_click_time_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.38}
+    ScoreLabel:
+        text: root.combo_time_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.33}
+
+    ScoreLabel:
+        text: root.overall_click_time_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.28}
+    ScoreLabel:
+        text: root.overall_time_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.23}
+    ScoreLabel:
+        text: root.digits_per_minute_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.18}
+
+    ScoreLabel:
+        text: root.date_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.13}
+
+# ----------------------------------------------------------------------------------------------------------------------
+<ScoresScreen2>:
+    on_pre_enter: root.update_scores()
+    canvas.before:
+        Color:
+            rgb: settings.yellow
+        Rectangle:
+            size: self.size
+        Color:
+            rgba: settings.dark_yellow
+        Rectangle:
+            size: self.width, self.height * 0.1
+            pos: 0, self.height * 0.9
+        Color:
+            rgba: settings.violet_red
+        Line:
+            points: 0, 0, 0, self.height
+            width: 15
+        Color:
+            rgba: settings.azure
+        Line:
+            points: self.width, 0, self.width, self.height
+            width: 15
+        Color:
+            rgba: settings.dark_violet_red
+        Line:
+            points: 0, self.height * 0.914, 0, self.height
+            width: 15
+        Color:
+            rgba: settings.dark_azure
+        Line:
+            points: self.width, self.height * 0.914, self.width, self.height
+            width: 15
+        Color:
+            rgba: settings.grey
+        Line:
+            points: 0, self.height * 0.9, self.width, self.height * 0.9
+            width: 4
+        Color:
+            rgba: settings.white
+        Line:
+            points: self.width * 0.17, self.height * 0.77, self.width * 0.83, self.height * 0.77
+            width: 2
+
+    MenuArrowButton:
+
+    BackToMenu:
+
+    Category:
+        text: 'Highest Score'
+
+    ArrowButton:
+        pos_hint: {"center_x": 0.08, "center_y": 0.84}
+        icon: "arrow-left-bold-outline"
+        on_release:
+            root.manager.transition.direction = "right"
+            root.manager.transition.duration = 0.5
+            root.manager.current = 'scores_screen'
+
+    ArrowButton:
+        pos_hint: {"center_x": 0.92, "center_y": 0.84}
+        icon: "arrow-right-bold-outline"
+        on_release:
+            root.manager.transition.direction = "left"
+            root.manager.transition.duration = 0.5
+            root.manager.current = 'scores_screen_3'
+
+    MainScore:
+        text: root.points_label
+    ScoreLabel:
+        text: root.decimals_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.63}
+    ScoreLabel:
+        text: root.mistakes_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.58}
+    ScoreLabel:
+        text: root.efficacy_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.53}
+
+    ScoreLabel:
+        text: root.longest_combo_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.48}
+    ScoreLabel:
+        text: root.extra_points_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.43}
+    ScoreLabel:
+        text: root.combo_click_time_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.38}
+    ScoreLabel:
+        text: root.combo_time_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.33}
+
+    ScoreLabel:
+        text: root.overall_click_time_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.28}
+    ScoreLabel:
+        text: root.overall_time_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.23}
+    ScoreLabel:
+        text: root.digits_per_minute_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.18}
+
+    ScoreLabel:
+        text: root.date_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.13}
+
+# ----------------------------------------------------------------------------------------------------------------------
+<ScoresScreen3>:
+    on_pre_enter: root.update_scores()
+    canvas.before:
+        Color:
+            rgb: settings.azure
+        Rectangle:
+            size: self.size
+        Color:
+            rgba: settings.dark_azure
+        Rectangle:
+            size: self.width, self.height * 0.1
+            pos: 0, self.height * 0.9
+        Color:
+            rgba: settings.yellow
+        Line:
+            points: 0, 0, 0, self.height
+            width: 15
+        Color:
+            rgba: settings.blue
+        Line:
+            points: self.width, 0, self.width, self.height
+            width: 15
+        Color:
+            rgba: settings.dark_yellow
+        Line:
+            points: 0, self.height * 0.914, 0, self.height
+            width: 15
+        Color:
+            rgba: settings.dark_blue
+        Line:
+            points: self.width, self.height * 0.914, self.width, self.height
+            width: 15
+        Color:
+            rgba: settings.grey
+        Line:
+            points: 0, self.height * 0.9, self.width, self.height * 0.9
+            width: 4
+        Color:
+            rgba: settings.white
+        Line:
+            points: self.width * 0.17, self.height * 0.77, self.width * 0.83, self.height * 0.77
+            width: 2
+
+    MenuArrowButton:
+
+    BackToMenu:
+
+    Category:
+        text: 'No Mistakes'
+
+    ArrowButton:
+        pos_hint: {"center_x": 0.08, "center_y": 0.84}
+        icon: "arrow-left-bold-outline"
+        on_release:
+            root.manager.transition.direction = "right"
+            root.manager.transition.duration = 0.5
+            root.manager.current = 'scores_screen_2'
+
+    ArrowButton:
+        pos_hint: {"center_x": 0.92, "center_y": 0.84}
+        icon: "arrow-right-bold-outline"
+        on_release:
+            root.manager.transition.direction = "left"
+            root.manager.transition.duration = 0.5
+            root.manager.current = 'scores_screen_4'
+
+    MainScore:
+        text: root.decimals_label
+    MainScore:
+        text: root.mistakes_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.64}
+    ScoreLabel:
+        text: root.points_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.58}
+
+    ScoreLabel:
+        text: root.longest_combo_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.52}
+    ScoreLabel:
+        text: root.extra_points_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.46}
+    ScoreLabel:
+        text: root.combo_click_time_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.40}
+    ScoreLabel:
+        text: root.combo_time_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.34}
+
+    ScoreLabel:
+        text: root.overall_click_time_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.28}
+    ScoreLabel:
+        text: root.overall_time_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.22}
+    ScoreLabel:
+        text: root.digits_per_minute_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.16}
+
+    ScoreLabel:
+        text: root.date_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.1}
+
+# ----------------------------------------------------------------------------------------------------------------------
+<ScoresScreen4>:
+    on_pre_enter: root.update_scores()
+    canvas.before:
+        Color:
+            rgb: settings.blue
+        Rectangle:
+            size: self.size
+        Color:
+            rgba: settings.dark_blue
+        Rectangle:
+            size: self.width, self.height * 0.1
+            pos: 0, self.height * 0.9
+        Color:
+            rgba: settings.azure
+        Line:
+            points: 0, 0, 0, self.height
+            width: 15
+        Color:
+            rgba: settings.violet_red
+        Line:
+            points: self.width, 0, self.width, self.height
+            width: 15
+        Color:
+            rgba: settings.dark_azure
+        Line:
+            points: 0, self.height * 0.914, 0, self.height
+            width: 15
+        Color:
+            rgba: settings.dark_violet_red
+        Line:
+            points: self.width, self.height * 0.914, self.width, self.height
+            width: 15
+        Color:
+            rgba: settings.grey
+        Line:
+            points: 0, self.height * 0.9, self.width, self.height * 0.9
+            width: 4
+        Color:
+            rgba: settings.white
+        Line:
+            points: self.width * 0.17, self.height * 0.77, self.width * 0.83, self.height * 0.77
+            width: 2
+
+    MenuArrowButton:
+
+    BackToMenu:
+
+    Category:
+        text: 'Longest Combo'
+
+    ArrowButton:
+        pos_hint: {"center_x": 0.08, "center_y": 0.84}
+        icon: "arrow-left-bold-outline"
+        on_release:
+            root.manager.transition.direction = "right"
+            root.manager.transition.duration = 0.5
+            root.manager.current = 'scores_screen_3'
+
+    ArrowButton:
+        pos_hint: {"center_x": 0.92, "center_y": 0.84}
+        icon: "arrow-right-bold-outline"
+        on_release:
+            root.manager.transition.direction = "left"
+            root.manager.transition.duration = 0.5
+            root.manager.current = 'scores_screen'
+
+    MainScore:
+        text: root.longest_combo_label
+    ScoreLabel:
+        text: root.extra_points_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.63}
+        font_size: dp(25)
+
+    ScoreLabel:
+        text: root.combo_click_time_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.56}
+        font_size: dp(25)
+    ScoreLabel:
+        text: root.combo_time_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.49}
+        font_size: dp(25)
+    ScoreLabel:
+        text: root.digits_per_minute_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.42}
+        font_size: dp(25)
+
+    ScoreLabel:
+        text: root.date_label
+        pos_hint: {"center_x": 0.5, "center_y": 0.35}
+        font_size: dp(25)
+
+# ----------------------------------------------------------------------------------------------------------------------
+<MenuArrowButton@MDIconButton>:
+    md_bg_color: 0, 0, 0, 0
+    pos_hint: {"center_x": 0.08, "center_y": 0.95}
+    icon: "arrow-left"
+    theme_text_color: "Custom"
+    text_color: settings.white
+    user_font_size: "35dp"
+    ripple_alpha: 0
+    on_release:
+        root.parent.manager.transition.direction = "right"
+        root.parent.manager.transition.duration = 0.4
+        root.parent.manager.current = 'main_menu'
+
+<BackToMenu@Label>:
+    text: 'return'
+    color: settings.white
+    font_size: dp(25)
+    font_name: "fonts/font_1.ttf"
+    pos_hint: {"center_x": 0.2, "center_y": 0.953}
+
+<Category@Label>:
+    color: settings.white
+    font_size: dp(50)
+    font_name: "fonts/font_1.ttf"
+    pos_hint: {"center_x": 0.5, "center_y": 0.84}
+
+<ArrowButton@MDIconButton>:
+    md_bg_color: 0, 0, 0, 0
+    theme_text_color: "Custom"
+    text_color: settings.white
+    user_font_size: "50dp"
+
+<MainScore@Label>:
+    color: settings.white
+    font_size: dp(40)
+    font_name: "fonts/font_1.ttf"
+    pos_hint: {"center_x": 0.5, "center_y": 0.71}
+    size: self.size
+    halign: "center"
+
+<ScoreLabel@Label>:
+    color: settings.white
+    font_size: dp(25)
+    font_name: "fonts/font_1.ttf"
+    size: self.size
+    halign: "left"

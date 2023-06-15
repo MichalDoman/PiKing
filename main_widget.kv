@@ -1,0 +1,152 @@
+#:import settings settings
+
+<MainWidget>:
+    on_pre_enter:
+        root.update_keypad_size()
+        root.adjust_stack_layout()
+    canvas.before:
+        Color:
+            rgba: app.bg_color
+        Rectangle:
+            size: self.size
+        Color:
+            rgba: settings.dark_yellow
+        Rectangle:
+            size: self.width, self.height * 0.04
+            pos: 0, self.height * 0.96
+        Color:
+            rgba: settings.yellow
+        Rectangle:
+            size: self.width, self.height * 0.08
+            pos: 0, self.height * 0.88
+        Color:
+            rgba: settings.grey
+        Line:
+            points: (0, self.height * (root.keypad_size + 0.1), self.width, self.height * (root.keypad_size + 0.1))
+            width: 3
+        Line:
+            points: (0, self.height * 0.88, self.width, self.height * 0.88)
+            width: 3
+
+    MDIconButton:
+        md_bg_color: 0, 0, 0, 0
+        pos_hint: {"center_x": 0.08, "center_y": 0.92}
+        icon: "arrow-left"
+        theme_text_color: "Custom"
+        text_color: settings.black
+        user_font_size: "35dp"
+        ripple_color: settings.violet_red
+        ripple_alpha: 0.9
+        on_release:
+            root.manager.transition.direction = "right"
+            root.manager.transition.duration = 0.5
+            root.manager.current = 'main_menu'
+            root.reset()
+
+    MDTextButton:
+        text: "Reset"
+        pos_hint: {"center_x": 0.2, "center_y": 0.92}
+        theme_text_color: "Custom"
+        text_color: settings.black
+        font_size: dp(27)
+        font_name: "fonts/font_1.ttf"
+        on_press: root.reset()
+
+    FloatLayout:
+        ScrollView:
+            bar_color: 0, 0, 0, 0
+            size_hint: 1, (0.77 - root.keypad_size)
+            pos: 0, root.height * (root.keypad_size + 0.1)
+            scroll_y: 0
+            StackLayout:
+                id: mw_stack_layout
+                orientation: 'lr-tb'
+                height: self.minimum_height
+                padding: (self.width * 0.14, 0, self.width * 0.06, 0)
+                size_hint: 1, None
+    Label:
+        id: mw_points_label
+        text: root.points_label
+        font_size: dp(27)
+        font_name: "fonts/font_1.ttf"
+        color: settings.black
+        size: self.texture_size
+        pos_hint: {"center_x": 0.65, "center_y": 0.92}
+
+    Label:
+        id: extra_points_label
+        text: root.extra_points_label
+        font_size: dp(25)
+        font_name: "fonts/font_1.ttf"
+        color: settings.dark_blue
+        size: self.texture_size
+        pos_hint: {"center_x": 1.1, "center_y": 0.92}
+
+    BoxLayout:
+        orientation: "horizontal"
+        pos_hint: {"x": 0, "center_y": root.keypad_size + 0.06}
+        StatsLabel:
+            text: root.mistakes_label
+        StatsLabel:
+            id: decimals_label
+            text: root.decimals_label
+            font_size: dp(20)
+        StatsLabel:
+            text: root.efficacy_label
+
+    KeypadButton:
+        text: '7'
+        pos_hint: {"center_x": 0.167, "center_y": root.keypad_size*7/8}
+    KeypadButton:
+        text: '8'
+        pos_hint: {"center_x": 0.5, "center_y": root.keypad_size*7/8}
+    KeypadButton:
+        text: '9'
+        pos_hint: {"center_x": 0.833, "center_y": root.keypad_size*7/8}
+    KeypadButton:
+        text: '4'
+        pos_hint: {"center_x": 0.167, "center_y": root.keypad_size*5/8}
+    KeypadButton:
+        text: '5'
+        pos_hint: {"center_x": 0.5, "center_y": root.keypad_size*5/8}
+    KeypadButton:
+        text: '6'
+        pos_hint: {"center_x": 0.833, "center_y": root.keypad_size*5/8}
+    KeypadButton:
+        text: '1'
+        pos_hint: {"center_x": 0.167, "center_y": root.keypad_size*3/8}
+    KeypadButton:
+        text: '2'
+        pos_hint: {"center_x": 0.5, "center_y": root.keypad_size*3/8}
+    KeypadButton:
+        text: '3'
+        pos_hint: {"center_x": 0.833, "center_y": root.keypad_size*3/8}
+    KeypadButton:
+        text: '0'
+        size_hint: 1, root.keypad_size/4
+        pos_hint: {"center_x": 0.5, "center_y": root.keypad_size/8}
+
+<StatsLabel@Label>:
+    font_size: dp(17)
+    font_name: "fonts/font_1.ttf"
+    color: app.text_color
+    halign: 'center'
+    valign: 'bottom'
+
+<DigitLabel@Label>:
+    id: root.label_id
+    font_size: dp(60)
+    font_name: "fonts/font_1.ttf"
+    height: self.texture_size[1]
+
+<KeypadButton@MDRoundFlatButton>:
+    size_hint: 0.333, root.parent.keypad_size/4
+    md_bg_color: 0, 0, 0, 0
+    line_color: 0, 0, 0, 0
+    font_size: dp(100 * root.parent.keypad_size)
+    font_name: "fonts/font_1.ttf"
+    text_color: app.text_color
+
+    ripple_color: settings.grey
+    ripple_alpha: 0.5
+    on_release: root.parent.on_keypad_button_press(self.text)

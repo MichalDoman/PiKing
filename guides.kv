@@ -1,0 +1,199 @@
+#:import settings settings
+
+<GuidesScreen>:
+    canvas.before:
+        Color:
+            rgba: settings.azure
+        Rectangle:
+            size: self.size
+        Color:
+            rgba: settings.dark_yellow
+        Rectangle:
+            size: self.width, self.height * 0.04
+            pos: 0, self.height * 0.96
+        Color:
+            rgba: settings.yellow
+        Rectangle:
+            size: self.width, self.height * 0.08
+            pos: 0, self.height * 0.88
+        Color:
+            rgba: settings.grey
+        Line:
+            points: (0, self.height * 0.88, self.width, self.height * 0.88)
+            width: 3
+        Color:
+            rgba: settings.dark_azure
+        Line:
+            points: (self.width * 0.1, self.height * 0.78, self.width * 0.9, self.height * 0.78)
+            width: 1.2
+        Line:
+            points: (self.width * 0.1, self.height * 0.68, self.width * 0.9, self.height * 0.68)
+            width: 1.2
+        Line:
+            points: (self.width * 0.1, self.height * 0.58, self.width * 0.9, self.height * 0.58)
+            width: 1.2
+
+    ReturnArrow:
+        on_release:
+            root.manager.transition.direction = "right"
+            root.manager.transition.duration = 0.5
+            root.manager.current = 'main_menu'
+
+    ReturnLabel:
+
+    GuideNameButton:
+        text: ' #1.  Introduction to Pi King'
+        pos_hint: {'center_x': 0.5, 'top': 0.88}
+        on_release:
+            root.manager.transition.direction = "left"
+            root.manager.transition.duration = 0.5
+            root.manager.current = 'about_the_app_screen'
+
+    GuideNameButton:
+        text: ' #2.  Your Own Mnemonic Major System'
+        pos_hint: {'center_x': 0.5, 'top': 0.78}
+
+    GuideNameButton:
+        text: ' Credits'
+        pos_hint: {'center_x': 0.5, 'top': 0.68}
+
+#-----------------------------------------------------------------------------------------------------------------------
+<AboutTheAppPageLayout>:
+    canvas.before:
+        Color:
+            rgba: settings.dark_yellow
+        Rectangle:
+            size: self.width, self.height * 0.04
+            pos: 0, self.height * 0.96
+        Color:
+            rgba: settings.yellow
+        Rectangle:
+            size: self.width, self.height * 0.08
+            pos: 0, self.height * 0.88
+        Color:
+            rgba: settings.grey
+        Line:
+            points: (0, self.height * 0.885, self.width, self.height * 0.885)
+            width: 3
+
+    ReturnArrow:
+        on_release:
+            root.manager.transition.direction = "right"
+            root.manager.transition.duration = 0.5
+            root.manager.current = 'guides_screen'
+
+    ReturnLabel:
+
+    PageLayout:
+        canvas.before:
+            Color:
+                rgba: settings.azure
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        canvas.after:
+            Color:
+                rgba: settings.very_dark_azure
+            Line:
+                points: 0, self.height * 0.9, self.width, self.height * 0.9
+                width: 3
+        size_hint: 1, 0.88
+        border: 80
+
+        FloatLayout:
+            canvas.before:
+                Color:
+                    rgba: settings.azure
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            PageTitle:
+                text: 'Introduction'
+            PageNumber:
+                text: '1.'
+            PageScroll:
+                FloatLayout:
+                    size_hint_y: 1.5
+                    MainText:
+                        text: root.text_pt_1
+
+        FloatLayout:
+            canvas.before:
+                Color:
+                    rgba: settings.dark_azure
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            MainText:
+                text: 'pt2'
+            PageNumber:
+                text: '2.'
+
+        FloatLayout:
+            canvas.before:
+                Color:
+                    rgba: settings.azure
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            MainText:
+                text: 'pt3'
+            PageNumber:
+                text: '3.'
+
+#-----------------------------------------------------------------------------------------------------------------------
+<GuideNameButton@MDRoundFlatButton>:
+    font_size: dp(25)
+    font_name: "fonts/font_1.ttf"
+    line_color: 0, 0, 0, 0
+    text_color: settings.white
+    text_size: self.width, None
+    anchor_x: 'left'
+    size_hint: 0.84, 0.1
+    ripple_color: settings.very_dark_azure
+    ripple_alpha: 0.1
+
+<ReturnArrow@MDIconButton>:
+    md_bg_color: 0, 0, 0, 0
+    pos_hint: {"center_x": 0.08, "center_y": 0.92}
+    icon: "arrow-left"
+    theme_text_color: "Custom"
+    text_color: settings.black
+    user_font_size: "35dp"
+    ripple_color: settings.violet_red
+    ripple_alpha: 0.9
+
+<ReturnLabel@Label>:
+    text: 'return'
+    color: settings.black
+    font_size: dp(25)
+    font_name: "fonts/font_1.ttf"
+    pos_hint: {"center_x": 0.2, "center_y": 0.92}
+
+#-----------------------------------------------------------------------------------------------------------------------
+<PageTitle@Label>:
+    font_size: dp(30)
+    font_name: "fonts/font_1.ttf"
+    color: settings.very_dark_azure
+    pos_hint:{"center_x": 0.5, "center_y": 0.95}
+
+<PageScroll@ScrollView>:
+    bar_color: 0, 0, 0, 0
+    scroll_y: 1
+    size_hint: 1, 0.9
+
+<MainText@Label>:
+    font_size: dp(25)
+    font_name: "fonts/font_1.ttf"
+    color: settings.white
+    size_hint_x: 0.8
+    pos_hint: {"center_x": 0.5}
+    text_size: root.width, root.height * 0.95
+    halign: "left"
+    valign: 'top'
+
+<PageNumber@Label>:
+    font_size: dp(40)
+    font_name: "fonts/font_1.ttf"
+    color: settings.white
+    pos_hint:{"center_x": 0.08, "center_y": 0.95}
