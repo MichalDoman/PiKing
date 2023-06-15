@@ -1,6 +1,5 @@
 import json
 import kivy
-
 kivy.require('2.1.0')
 from kivy.clock import Clock
 from kivy.animation import Animation
@@ -10,19 +9,18 @@ from kivy.metrics import dp
 from kivy.properties import StringProperty, NumericProperty
 from kivy.uix.label import Label
 from kivymd.app import MDApp
-from kivymd.uix.button import MDRectangleFlatButton, MDIconButton
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.factory import Factory
 from datetime import date, datetime
-from scores import ScoresScreen, ScoresScreen2, ScoresScreen3, ScoresScreen4
-from guides import GuidesScreen, AboutTheAppPageLayout
-from settings import *
-from pi import pi_decimals
+from utils.scores import ScoresScreen, ScoresScreen2, ScoresScreen3, ScoresScreen4
+from utils.guides import GuidesScreen, AboutTheAppPageLayout
+from utils.settings import *
+from utils.pi import pi_decimals
 
-Builder.load_file('main_widget.kv')
-Builder.load_file('settings.kv')
-Builder.load_file('scores_screen.kv')
-Builder.load_file('guides.kv')
+Builder.load_file('kv/main_widget.kv')
+Builder.load_file('kv/settings.kv')
+Builder.load_file('kv/scores_screen.kv')
+Builder.load_file('kv/guides.kv')
 Window.size = (550, 750)
 
 
@@ -260,7 +258,7 @@ class MainWidget(Screen):
 
             stats['longest_combo']['current_date'] = f"{self.current_date}   {self.current_time}"
 
-        with open('statistics.json', 'w') as stats_file:
+        with open('json/statistics.json', 'w') as stats_file:
             json.dump(stats, stats_file)
 
     @staticmethod
@@ -455,7 +453,7 @@ class SettingsScreen(Screen):
         'pt_start_from_record': False,
     }
     try:
-        with open('settings.json') as settings_file:
+        with open('json/settings.json') as settings_file:
             data = json.load(settings_file)
     except FileNotFoundError:
         print('File created')
@@ -487,7 +485,7 @@ class SettingsScreen(Screen):
             self.data['keypad_size'] = 4
             self.keypad_label = 'gargantuan'
 
-        with open('settings.json', 'w') as data_file:
+        with open('json/settings.json', 'w') as data_file:
             json.dump(self.data, data_file)
 
     def on_dbs_slider_value(self, slider):
@@ -495,7 +493,7 @@ class SettingsScreen(Screen):
         MainWidget.digits_between_spacing = int(slider.value)
         self.data['mw_digits_between_spacing'] = int(slider.value)
 
-        with open('settings.json', 'w') as data_file:
+        with open('json/settings.json', 'w') as data_file:
             json.dump(self.data, data_file)
 
     def on_hd_slider_value(self, slider):
@@ -503,7 +501,7 @@ class SettingsScreen(Screen):
         MainWidget.digits_to_highlight = int(slider.value)
         self.data['mw_digits_to_highlight'] = int(slider.value)
 
-        with open('settings.json', 'w') as data_file:
+        with open('json/settings.json', 'w') as data_file:
             json.dump(self.data, data_file)
 
     def on_pt_dtl_slider_value(self, slider):
@@ -511,7 +509,7 @@ class SettingsScreen(Screen):
         PiTrainingWidget.digits_to_load = int(slider.value)
         self.data['pt_digits_to_load'] = int(slider.value)
 
-        with open('settings.json', 'w') as data_file:
+        with open('json/settings.json', 'w') as data_file:
             json.dump(self.data, data_file)
 
     def on_pt_dbs_slider_value(self, slider):
@@ -519,7 +517,7 @@ class SettingsScreen(Screen):
         PiTrainingWidget.digits_between_spacing = int(slider.value)
         self.data['pt_digits_between_spacing'] = int(slider.value)
 
-        with open('settings.json', 'w') as data_file:
+        with open('json/settings.json', 'w') as data_file:
             json.dump(self.data, data_file)
 
     def on_pt_hd_slider_value(self, slider):
@@ -527,7 +525,7 @@ class SettingsScreen(Screen):
         PiTrainingWidget.digits_to_highlight = int(slider.value)
         self.data['pt_digits_to_highlight'] = int(slider.value)
 
-        with open('settings.json', 'w') as data_file:
+        with open('json/settings.json', 'w') as data_file:
             json.dump(self.data, data_file)
 
     def update_sliders(self):
@@ -566,7 +564,7 @@ class SettingsScreen(Screen):
         else:
             self.data['pt_start_from_record'] = False
 
-        with open('settings.json', 'w') as settings_file:
+        with open('json/settings.json', 'w') as settings_file:
             json.dump(self.data, settings_file)
 
 
@@ -607,7 +605,7 @@ class PiKingApp(MDApp):
             SettingsScreen.data['dark_mode'] = True
         else:
             SettingsScreen.data['dark_mode'] = False
-        with open('settings.json', 'w') as settings_file:
+        with open('json/settings.json', 'w') as settings_file:
             json.dump(SettingsScreen.data, settings_file)
 
 
