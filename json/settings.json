@@ -1,10 +1,1 @@
-{
-  "dark_mode": true,
-  "keypad_size": 2,
-  "mw_digits_between_spacing": 10,
-  "mw_digits_to_highlight": 10,
-  "pt_digits_to_load": 50,
-  "pt_digits_between_spacing": 2,
-  "pt_digits_to_highlight": 10,
-  "pt_start_from_record": false
-}
+{"dark_mode": false, "keypad_size": 2, "mw_digits_between_spacing": 10, "mw_digits_to_highlight": 10, "pt_digits_to_load": 50, "pt_digits_between_spacing": 2, "pt_digits_to_highlight": 10, "pt_start_from_record": false}

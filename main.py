@@ -1,5 +1,6 @@
 import json
 import kivy
+
 kivy.require('2.1.0')
 from kivy.clock import Clock
 from kivy.animation import Animation
@@ -14,9 +15,10 @@ from kivy.factory import Factory
 from datetime import date, datetime
 from utils.scores import ScoresScreen, ScoresScreen2, ScoresScreen3, ScoresScreen4
 from utils.guides import GuidesScreen, AboutTheAppPageLayout
-from utils.settings import *
+from settings import *
 from utils.pi import pi_decimals
 
+Builder.load_file('kv/PiKing.kv')
 Builder.load_file('kv/main_widget.kv')
 Builder.load_file('kv/settings.kv')
 Builder.load_file('kv/scores_screen.kv')
@@ -228,8 +230,7 @@ class MainWidget(Screen):
 
         # Game with most decimals without making any mistakes:
         if self.mistakes == 0 and self.click_counter > stats['no_mistakes']['decimals'] or (
-                self.mistakes == 0 and self.click_counter == stats['no_mistakes'][
-            'decimals'] and self.points > stats['no_mistakes']['points']):
+                self.mistakes == 0 and self.click_counter == stats['no_mistakes']['decimals'] and self.points > stats['no_mistakes']['points']):
             stats['no_mistakes']['decimals'] = self.click_counter
             stats['no_mistakes']['mistakes'] = self.mistakes
             stats['no_mistakes']['points'] = self.points
@@ -596,7 +597,7 @@ class PiKingApp(MDApp):
         for screen in screens:
             sm.add_widget(screen)
 
-        sm.current = "settings_screen"
+        sm.current = "main_menu"
         return sm
 
     @staticmethod
