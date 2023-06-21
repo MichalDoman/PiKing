@@ -51,7 +51,7 @@ Every category has its own statistics which are adjusted to the category specifi
 7. Combo time - how much time was spend in combos
 8. Time per digit - Average time to type digits overly
 9. Play time - how long was the game until restart or exit
-10. Digits per minute - the temp of typing digits per minute
+10. Digits per minute - the tempo of typing digits per minute
 11. Date - when the high score was reached
  <p align="center">
     <img src="https://github.com/MichalDoman/PiKing/blob/main/screenshots/piking_scores_1.png"  width="20%" height="30%">
